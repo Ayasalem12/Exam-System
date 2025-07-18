@@ -1,0 +1,51 @@
+html
+  head
+    title Todos List
+    style.
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+        background-color: #f4f4f4;
+      }
+      h1 {
+        color: #333;
+      }
+      ul {
+        list-style-type: none;
+        padding: 0;
+      }
+      li {
+        background: #fff;
+        margin: 10px 0;
+        padding: 15px;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      }
+      .todo-title {
+        font-weight: bold;
+        color: #555;
+      }
+      .todo-status {
+        color: #888;
+        font-style: italic;
+      }
+      .todo-user {
+        color: #666;
+        font-size: 0.9em;
+      }
+      .no-todos {
+        color: #888;
+        font-style: italic;
+      }
+  body
+    h1 Todos List
+    if todos && todos.length
+      ul
+        each todo in todos
+          li
+            span.todo-title #{todo.title}
+            span.todo-status  (Status: #{todo.status})
+            if todo.userId
+              span.todo-user  - Created by: #{todo.userId.username}
+    else
+      p.no-todos No todos found.

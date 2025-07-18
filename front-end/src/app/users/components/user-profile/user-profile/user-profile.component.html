@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<section class="profile-container">
+  <div class="profile-card">
+    <div class="card-body">
+      <div class="profile-header">
+        <div class="profile-icon">
+          <i class="fas fa-user"></i>
+        </div>
+        <h2 class="profile-title">User Profile</h2>
+        <p class="profile-subtitle">View and manage your account details</p>
+      </div>
+
+      <div *ngIf="loading" class="loading-message">
+        <div class="spinner-border text-danger" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+        <p>Loading profile...</p>
+      </div>
+
+      <div *ngIf="error" class="error-message">
+        <i class="fas fa-exclamation-circle"></i>{{ error }}
+      </div>
+
+      <div *ngIf="!loading && !error && user" class="profile-content">
+        <div class="profile-field">
+          <label>Username</label>
+          <p>{{ user.username || "N/A" }}</p>
+        </div>
+
+        <div class="profile-field">
+          <label>Email</label>
+          <p>{{ user.email || "N/A" }}</p>
+        </div>
+
+        <div class="profile-field">
+          <label>Role</label>
+          <p>
+            <span
+              class="role-badge"
+              [ngClass]="{
+                admin: user.role === 'admin',
+                user: user.role === 'user',
+                unknown: !user.role
+              }"
+            >
+              {{ user.role || "User" }}
+            </span>
+          </p>
+        </div>
+
+        <div class="profile-actions">
+          <button type="button" routerLink="/edit-profile" class="btn btn-edit">
+            <i class="fas fa-edit"></i>Edit Profile
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

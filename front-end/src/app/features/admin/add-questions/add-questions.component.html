@@ -1,0 +1,85 @@
+<section class="container py-5">
+  <h2 class="text-center  text-danger mb-4" style="color: transparent; font-weight: 700; text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);">
+    Add Question
+  </h2>
+
+  <!-- Success/Error Messages -->
+  <div *ngIf="successMessage" class="alert alert-success" role="alert">
+    {{ successMessage }}
+  </div>
+  <div *ngIf="errorMessage" class="alert alert-danger" role="alert">
+    {{ errorMessage }}
+  </div>
+
+  <!-- Form -->
+  <form (ngSubmit)="onSubmit()" class="card shadow-sm p-4">
+    <!-- Question Description -->
+    <div class="mb-4">
+      <label for="questionDesc" class="form-label fw-semibold">Question Description</label>
+      <textarea
+        id="questionDesc"
+        class="form-control"
+        [(ngModel)]="question.questionDesc"
+        name="questionDesc"
+        rows="4"
+        placeholder="Enter the question description"
+        required
+      ></textarea>
+    </div>
+
+    <!-- Score -->
+    <div class="mb-4">
+      <label for="score" class="form-label fw-semibold">Score (Points)</label>
+      <input
+        type="number"
+        id="score"
+        class="form-control"
+        [(ngModel)]="question.score"
+        name="score"
+        min="1"
+        required
+      />
+    </div>
+
+    <!-- Choices -->
+    <div class="mb-4">
+      <label class="form-label fw-semibold">Choices</label>
+      <div *ngFor="let choice of question.choices; let i = index" class="input-group mb-3">
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="question.choices[i]"
+          [name]="'choice-' + i"
+          placeholder="Enter choice {{ i + 1 }}"
+          required
+        />
+        <div class="input-group-text">
+          <input
+            type="radio"
+            [name]="'answer'"
+            [checked]="question.answer === choice"
+            (change)="updateAnswer(choice)"
+            [disabled]="!choice"
+          />
+        </div>
+        <button
+          type="button"
+          class="btn btn-outline-danger"
+          (click)="removeChoice(i)"
+          [disabled]="question.choices.length <= 1"
+        >
+          Remove
+        </button>
+      </div>
+      <button type="button" class="btn btn-outline-danger" (click)="addChoice()">
+        Add Choice
+      </button>
+    </div>
+
+    <!-- Form Actions -->
+    <div class="d-flex justify-content-end">
+      <button type="submit" class="btn btn-danger me-2">Add Question</button>
+      <a routerLink="/exams" class="btn btn-secondary">Cancel</a>
+    </div>
+  </form>
+</section>

@@ -1,0 +1,92 @@
+<section class="container py-5 mx-3">
+  <h2 class="text-center mb-3 text-decoration-underline text-danger">
+    @if (isAdmin()) { All Results } @else { My Results }
+  </h2>
+  <!-- Success/Error Messages -->
+  <div *ngIf="successMessage" class="alert alert-success" role="alert">
+    {{ successMessage }}
+  </div>
+  <div *ngIf="errorMessage" class="alert alert-danger" role="alert">
+    {{ errorMessage }}
+  </div>
+
+  @if (results.length === 0 && !errorMessage) {
+  <div class="text-gray-500 text-center">No results found.</div>
+  } @else {
+  <table class="table align-middle mb-0 mx-2 bg-white">
+    <thead class="bg-light">
+      <tr>
+        @if (isAdmin() || !isAdmin()) {
+        <th>Student Name</th>
+        }
+        <th>Exam Title</th>
+        <th>Score</th>
+        <th>Status</th>
+        <th>Submitted At</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (result of results; track result._id) {
+      <tr>
+        @if (isAdmin() || !isAdmin()) {
+        <td>
+          <div class="d-flex align-items-center">
+            <img
+              src="https://mdbootstrap.com/img/new/avatars/8.jpg"
+              alt=""
+              style="width: 45px; height: 45px"
+              class="rounded-circle"
+            />
+            <div class="ms-3">
+              <p class="fw-bold mb-1">
+                {{ result.userId.username || "Unknown Student" }}
+              </p>
+            </div>
+          </div>
+        </td>
+        }
+
+        <td>
+          <p class="fw-normal mb-1">
+            {{ result.examId.title || "Unknown Exam" }}
+          </p>
+        </td>
+
+        <td>
+          <p class="fw-normal mb-1">{{ result.score }}</p>
+        </td>
+
+        <td>
+          <span
+            class="badge rounded-pill d-inline"
+            [ngClass]="{
+              'badge-success ': result.score >= 70,
+              'badge-warning': result.score >= 50 && result.score < 70,
+              'badge-danger text-white': result.score < 50
+            }"
+          >
+            {{
+              result.score >= 70
+                ? "Excellent"
+                : result.score >= 50
+                ? "Pass"
+                : "Fail"
+            }}
+          </span>
+        </td>
+
+        <td>{{ result.submittedAt | date : "medium" }}</td>
+      </tr>
+
+      }
+    </tbody>
+  </table>
+  }
+
+  <a
+    routerLink="/exams"
+    class="text-blue-500 btn btn-outline-info hover:underline mt-4 inline-block"
+  >
+    Back to Dashboard
+  </a>
+</section>

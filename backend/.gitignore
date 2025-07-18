@@ -1,0 +1,19 @@
+# Node.js dependencies
+node_modules/
+
+# Logs
+*.log
+
+# Environment files
+
+
+# Coverage reports
+coverage/
+
+# Build directories
+/dist
+/build
+
+# System files (OS-specific)
+.DS_Store
+Thumbs.db

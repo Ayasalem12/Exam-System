@@ -1,0 +1,118 @@
+
+.result-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 56px);
+  /* background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%); */
+  padding: 20px;
+}
+
+.result-card {
+  max-width: 500px;
+  width: 100%;
+  border-radius: 15px;
+  background-color: #ffffff;
+  transition: transform 0.3s ease-in-out;
+}
+
+.result-card:hover {
+  transform: translateY(-5px);
+}
+
+.icon-container {
+  animation: bounce 1s ease-in-out;
+}
+
+.score-circle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 120px;
+  height: 120px;
+  margin: 0 auto;
+  background: linear-gradient(45deg, #dc3545, #ff4d58); /* Red gradient */
+  border-radius: 50%;
+  box-shadow: 0 4px 10px rgba(220, 53, 69, 0.3); /* Red shadow */
+  color: white;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.score-text {
+  animation: fadeIn 1.5s ease-in-out;
+  color: #fff; /* Red text for score-related text */
+}
+
+.btn-primary {
+  background-color: #dc3545; /* Red button */
+  border: none;
+  padding: 10px 20px;
+  transition: background-color 0.3s;
+}
+
+.btn-primary:hover {
+  background-color: #c82333; /* Darker red on hover */
+}
+
+.btn-secondary {
+  background-color: #6c757d;
+  border: none;
+  padding: 10px 20px;
+  transition: background-color 0.3s;
+}
+
+.btn-secondary:hover {
+  background-color: #5a6268;
+}
+
+/* Animations */
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-20px);
+  }
+  60% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 576px) {
+  .result-card {
+    max-width: 90%;
+  }
+
+  .score-circle {
+    width: 100px;
+    height: 100px;
+    font-size: 1.2rem;
+  }
+
+  .btn {
+    font-size: 0.9rem;
+    padding: 8px 16px;
+  }
+
+  .card-title {
+    font-size: 1.5rem;
+  }
+
+  .card-subtitle {
+    font-size: 1rem;
+  }
+}
+

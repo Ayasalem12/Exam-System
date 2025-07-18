@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<div class="container-fluid vh-100 p-0">
+  <div class="row g-0 h-100">
+    <!-- Image Half -->
+    <div class="col-md-6 d-none d-md-block">
+      <div
+        class="h-100 bg-cover"
+        style="
+          background-image: url('https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+        "
+      >
+        <div
+          class="h-100 d-flex align-items-center justify-content-center"
+          style="background-color: rgba(220, 53, 69, 0.7)"
+        >
+          <div class="text-white text-center p-5">
+            <h1 class="display-4 fw-bold mb-4">Exam System</h1>
+            <p class="lead">Join our platform to take your exams online</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Form Half -->
+    <div
+      class="col-md-6 d-flex align-items-center justify-content-center bg-light"
+    >
+      <div class="w-100" style="max-width: 400px; padding: 0 1.5rem">
+        <div class="text-center mb-4">
+          <h2 class="fw-bold" style="color: #dc3545">Create Account</h2>
+        </div>
+
+        <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+          <div class="form-group mb-4">
+            <label class="form-label fw-semibold mb-2">Username</label>
+            <input
+              type="text"
+              class="form-control py-2 px-3"
+              style="border-color: #ced4da; border-radius: 4px"
+              formControlName="username"
+              placeholder="Choose a username"
+              [class.is-invalid]="
+                registerForm.get('username')?.invalid &&
+                registerForm.get('username')?.touched
+              "
+            />
+            <div
+              *ngIf="
+                registerForm.get('username')?.invalid &&
+                registerForm.get('username')?.touched
+              "
+              class="invalid-feedback mt-1"
+              style="color: #dc3545; font-size: 0.875rem"
+            >
+              <i class="fas fa-exclamation-circle me-1"></i>
+              Username is required
+            </div>
+          </div>
+
+          <div class="form-group mb-4">
+            <label class="form-label fw-semibold mb-2">Email</label>
+            <input
+              type="email"
+              class="form-control py-2 px-3"
+              style="border-color: #ced4da; border-radius: 4px"
+              formControlName="email"
+              placeholder="your@email.com"
+              [class.is-invalid]="
+                registerForm.get('email')?.invalid &&
+                registerForm.get('email')?.touched
+              "
+            />
+            <div
+              *ngIf="
+                registerForm.get('email')?.invalid &&
+                registerForm.get('email')?.touched
+              "
+              class="invalid-feedback mt-1"
+              style="color: #dc3545; font-size: 0.875rem"
+            >
+              <i class="fas fa-exclamation-circle me-1"></i>
+              Valid email required
+            </div>
+          </div>
+
+          <div class="form-group mb-4">
+            <label class="form-label fw-semibold mb-2">Password</label>
+            <input
+              type="password"
+              class="form-control py-2 px-3"
+              style="border-color: #ced4da; border-radius: 4px"
+              formControlName="password"
+              placeholder="Minimum 6 characters"
+              [class.is-invalid]="
+                registerForm.get('password')?.invalid &&
+                registerForm.get('password')?.touched
+              "
+            />
+            <div
+              *ngIf="
+                registerForm.get('password')?.invalid &&
+                registerForm.get('password')?.touched
+              "
+              class="invalid-feedback mt-1"
+              style="color: #dc3545; font-size: 0.875rem"
+            >
+              <i class="fas fa-exclamation-circle me-1"></i>
+              Minimum 6 characters required
+            </div>
+          </div>
+
+          <div class="form-group mb-4">
+            <label class="form-label fw-semibold mb-2">Account Type</label>
+            <select
+              class="form-select py-2 px-3"
+              style="border-color: #ced4da; border-radius: 4px"
+              formControlName="role"
+            >
+              <option value="student">Student</option>
+              <option value="admin">Admin</option>
+            </select>
+          </div>
+
+          <button
+            type="submit"
+            class="btn w-100 py-2 fw-semibold mb-3"
+            style="background-color: #dc3545; color: white; border-radius: 4px"
+            [disabled]="registerForm.invalid"
+          >
+            CREATE ACCOUNT
+          </button>
+
+          <div
+            *ngIf="error"
+            class="alert alert-danger py-2 mb-3 d-flex align-items-center"
+            style="border-radius: 4px"
+          >
+            <i class="fas fa-exclamation-triangle me-2"></i>
+            <div>{{ error }}</div>
+          </div>
+        </form>
+
+        <div class="text-center mt-4 pt-3 border-top">
+          <p class="text-muted mb-2">Already have an account?</p>
+          <button
+            class="btn btn-link p-0 fw-semibold"
+            style="color: #dc3545; text-decoration: none"
+            (click)="goToLogin()"
+          >
+            Sign in
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,19 @@
+{
+  "env": {
+    "browser": true,
+    "es2021": true
+  },
+  "extends": [
+    "plugin:@angular-eslint/recommended",
+    "plugin:@angular-eslint/template/recommended"
+  ],
+  "parserOptions": {
+    "ecmaVersion": 12,
+    "sourceType": "module"
+  },
+  "plugins": ["@angular-eslint", "@angular-eslint/template"],
+  "rules": {
+    "@angular-eslint/template/no-lowercase-attributes": "off",
+    "attr-lowercase": "off"
+  }
+}

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<div
+  class="container d-flex align-items-center"
+  style="min-height: 70vh; padding: 0.5rem"
+>
+  <div class="row justify-content-center w-100">
+    <div class="col-lg-8 col-xl-6">
+      <ng-container *ngIf="authService.isAdmin(); else notAdmin">
+        <div class="text-center mb-2">
+          <h2 class="fw-bold mb-1" style="color: #dc3545; font-size: 2.5rem">
+            Edit Profile
+          </h2>
+          <p class="text-muted" style="font-size: 1.25rem; margin-top: 0.5rem">
+            Update your profile details
+          </p>
+        </div>
+
+        <div class="card border-0 shadow-sm" style="border-radius: 8px">
+          <div class="card-body p-3">
+            <div *ngIf="error" class="alert alert-danger" role="alert">
+              {{ error }}
+            </div>
+            <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+              <div class="mb-2">
+                <label
+                  class="form-label fw-semibold d-block mb-1"
+                  style="font-size: 1.1rem"
+                >
+                  Username *
+                </label>
+                <input
+                  type="text"
+                  class="form-control py-2"
+                  style="
+                    border-color: #ced4da;
+                    border-radius: 4px;
+                    font-size: 1.05rem;
+                  "
+                  formControlName="username"
+                  placeholder="Enter username"
+                  [class.is-invalid]="
+                    profileForm.get('username')?.invalid &&
+                    profileForm.get('username')?.touched
+                  "
+                />
+                <div
+                  *ngIf="
+                    profileForm.get('username')?.invalid &&
+                    profileForm.get('username')?.touched
+                  "
+                  class="invalid-feedback mt-1"
+                  style="font-size: 0.95rem"
+                >
+                  <i class="fas fa-exclamation-circle me-1"></i>
+                  Username is required
+                </div>
+              </div>
+
+              <div class="mb-2">
+                <label
+                  class="form-label fw-semibold d-block mb-1"
+                  style="font-size: 1.1rem"
+                >
+                  Email *
+                </label>
+                <input
+                  type="email"
+                  class="form-control py-2"
+                  style="
+                    border-color: #ced4da;
+                    border-radius: 4px;
+                    font-size: 1.05rem;
+                  "
+                  formControlName="email"
+                  placeholder="Enter email"
+                  [class.is-invalid]="
+                    profileForm.get('email')?.invalid &&
+                    profileForm.get('email')?.touched
+                  "
+                />
+                <div
+                  *ngIf="
+                    profileForm.get('email')?.invalid &&
+                    profileForm.get('email')?.touched
+                  "
+                  class="invalid-feedback mt-1"
+                  style="font-size: 0.95rem"
+                >
+                  <i class="fas fa-exclamation-circle me-1"></i>
+                  {{ profileForm.get('email')?.errors?.['required'] ? 'Email is required' : 'Please enter a valid email (e.g., xxx@gmail.com or xxx@yahoo.com)' }}
+                </div>
+              </div>
+
+              <div class="d-flex gap-2 mt-3">
+                <button
+                  type="submit"
+                  class="btn flex-grow-1 py-2 fw-semibold"
+                  style="
+                    background-color: #dc3545;
+                    color: white;
+                    border-radius: 4px;
+                    font-size: 1.1rem;
+                  "
+                  [disabled]="profileForm.invalid"
+                >
+                  <i class="fas fa-save me-1"></i> Save Changes
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-outline-danger flex-grow-1 py-2 fw-semibold"
+                  style="border-radius: 4px; font-size: 1.1rem"
+                  (click)="onCancel()"
+                >
+                  <i class="fas fa-times me-1"></i> Cancel
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </ng-container>
+
+      <ng-template #notAdmin>
+        <div
+          class="alert alert-info border-0 shadow-sm py-2 px-3 mb-0"
+          style="border-radius: 6px"
+        >
+          <div class="d-flex align-items-center">
+            <i class="fas fa-info-circle me-2" style="font-size: 1.1rem"></i>
+            <div>
+              <h5 class="alert-heading mb-1" style="font-size: 1.1rem">
+                Admin Access Required
+              </h5>
+              <p class="mb-0" style="font-size: 0.95rem">
+                Contact your system administrator.
+              </p>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+    </div>
+  </div>
+</div>

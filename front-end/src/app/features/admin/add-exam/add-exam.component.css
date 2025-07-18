@@ -1,0 +1,57 @@
+/* Form styling */
+.card {
+  border-radius: 12px;
+  border: 1px solid rgba(220, 53, 69, 0.1);
+}
+
+.form-control {
+  transition: all 0.3s ease;
+}
+
+.form-control:focus {
+  border-color: #dc3545;
+  box-shadow: 0 0 0 0.25rem rgba(220, 53, 69, 0.25);
+}
+
+.invalid-feedback {
+  color: #dc3545;
+  font-size: 0.85rem;
+  margin-top: 0.25rem;
+}
+
+/* Button hover effects */
+.btn[style*="background-color: #DC3545"]:hover {
+  background-color: #c82333 !important;
+}
+
+.btn-outline-secondary[style*="color: #DC3545"]:hover {
+  background-color: #dc3545 !important;
+  color: white !important;
+}
+
+/* Responsive adjustments */
+@media (max-width: 576px) {
+  .card-body {
+    padding: 1.5rem !important;
+  }
+
+  .btn {
+    flex-basis: 100% !important;
+  }
+}
+
+/* Animation for form */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.card {
+  animation: fadeInUp 0.5s ease-out;
+}

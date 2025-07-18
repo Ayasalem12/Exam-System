@@ -1,0 +1,118 @@
+
+<section class="container py-5">
+  <h2 class="text-center  text-danger mb-4" style="  color: transparent; font-weight: 700; text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);">
+    Edit Question
+  </h2>
+
+  <!-- Success/Error Messages -->
+  @if (successMessage) {
+    <div class="alert alert-success alert-dismissible fade show text-center mb-4" role="alert">
+      {{ successMessage }}
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+  }
+  @if (errorMessage) {
+    <div class="alert alert-danger alert-dismissible fade show text-center mb-4" role="alert">
+      {{ errorMessage }}
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+  }
+
+  <!-- Form -->
+  <div class="card bg-light shadow-lg rounded-4 overflow-hidden" style="border: 1px solid #e0e0e0;">
+    <div class="card-body p-4">
+      <form (ngSubmit)="onSubmit()" class="needs-validation" novalidate>
+        <!-- Question Description -->
+        <div class="mb-4">
+          <label for="questionDesc" class="form-label fw-bold text-dark">Question Description</label>
+          <textarea
+            id="questionDesc"
+            class="form-control "
+            [(ngModel)]="question.questionDesc"
+            name="questionDesc"
+            rows="4"
+            placeholder="Enter or edit the question description"
+            required
+            style="resize: vertical; transition: border-color 0.3s ease;"
+              ></textarea>
+        </div>
+
+        <!-- Score -->
+        <div class="mb-4">
+          <label for="score" class="form-label fw-bold text-dark">Score (Points)</label>
+          <input
+            type="number"
+            id="score"
+            class="form-control "
+            [(ngModel)]="question.score"
+            name="score"
+            min="1"
+            required
+            style="transition: border-color 0.3s ease;"
+               />
+        </div>
+
+        <!-- Choices -->
+        <div class="mb-4">
+          <label class="form-label fw-bold text-dark">Choices</label>
+          @for (choice of question.choices; track $index; let i = $index) {
+            <div class="input-group mb-3" style="transition: all 0.3s ease;">
+              <input
+                type="text"
+                class="form-control "
+                [(ngModel)]="question.choices[i]"
+                [name]="'choice-' + i"
+                placeholder="Enter or edit choice {{ i + 1 }}"
+                required
+                style="transition: border-color 0.3s ease;"
+                  />
+              <div class="input-group-text bg-light">
+                <input
+                  type="radio"
+                  [name]="'answer'"
+                  [checked]="question.answer === choice"
+                  (change)="updateAnswer(choice)"
+                  [disabled]="!choice"
+                />
+              </div>
+              <button
+                type="button"
+                class="btn btn-outline-danger"
+                (click)="removeChoice(i)"
+                [disabled]="question.choices.length <= 1"
+                style="transition: background 0.3s, transform 0.2s;"
+                 >
+                 Remove
+              </button>
+            </div>
+          }
+          <button
+            type="button"
+            class="btn btn-outline-danger"
+            (click)="addChoice()"
+            style="transition: background 0.3s, transform 0.2s;"
+               >
+            <i class="fas fa-plus"></i> Add Choice
+          </button>
+        </div>
+
+        <!-- Form Actions -->
+        <div class="d-flex justify-content-end">
+          <button
+            type="submit"
+            class="btn btn-primary me-2"
+            style="background: linear-gradient(90deg, #1e3c72, #2a5298); border: none; transition: transform 0.2s;"
+
+          >
+            <i class="fas fa-save me-2"></i> Save Changes
+          </button>
+          <a routerLink="/take-exam/{{examId}}" class="btn btn-secondary"
+             style="transition: transform 0.2s;"
+             >
+            <i class="fas fa-times me-2"></i> Cancel
+          </a>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>

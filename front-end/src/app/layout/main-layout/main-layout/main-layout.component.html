@@ -1,0 +1,79 @@
+<div class="d-flex">
+  <!-- Sidebar -->
+  <nav
+    id="sidebarMenu"
+    class="bg-danger text-white shadow-lg"
+    [ngClass]="{ collapsed: isSidebarCollapsed }"
+    style="min-height: 100vh; transition: width 0.3s"
+  >
+    <div class="position-sticky">
+      <div class="list-group list-group-flush mx-3 mt-4">
+        <a
+          routerLink="/exams"
+          class="list-group-item list-group-item-action py-2 rounded text-white"
+          style="margin-top: 5rem"
+          routerLinkActive="active bg-white text-danger"
+        >
+          <i class="bi bi-house-door-fill me-3"></i
+          ><span class="fs-6 fw-semibold">Home</span>
+        </a>
+        <a
+          [routerLink]="['/result-list']"
+          class="list-group-item list-group-item-action py-2 my-2 rounded text-white"
+          routerLinkActive="active bg-white text-danger"
+        >
+          <i class="bi bi-journal-check me-3"></i
+          ><span class="fs-6 fw-semibold">Result List</span>
+        </a>
+        @if(isAdmin()){
+        <a
+          [routerLink]="['/add-exam']"
+          class="list-group-item list-group-item-action py-2 my-2 rounded text-white"
+          routerLinkActive="active bg-white text-danger"
+        >
+          <i class="bi bi-journal-check me-3"></i
+          ><span class="fs-6 fw-semibold">Add Exam</span>
+        </a>
+      }
+        <a
+          [routerLink]="['/exams']"
+          class="list-group-item list-group-item-action py-2 my-2 rounded text-white"
+          routerLinkActive="active bg-white text-danger"
+        >
+          <i class="bi bi-plus-circle-fill me-3"></i
+          ><span class="fs-6 fw-semibold">Exams</span>
+        </a>
+        <a
+          [routerLink]="['/profile']"
+          class="list-group-item list-group-item-action py-2 my-2 rounded text-white"
+          routerLinkActive="active bg-white text-danger"
+        >
+          <i class="bi bi-person-fill me-3"></i
+          ><span class="fs-6 fw-semibold">Profile</span>
+        </a>
+        <a
+          (click)="onLogOut()"
+          class="list-group-item list-group-item-action py-2 my-2 rounded text-white"
+          routerLinkActive="active bg-white text-danger"
+        >
+          <i class="bi bi-box-arrow-right me-3"></i
+          ><span class="fs-6 fw-semibold">Logout</span>
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <div class="flex-grow-1 bg-light">
+    <!-- Header -->
+    <app-header (toggleSidebar)="toggleSidebar()"></app-header>
+
+    <!-- Content -->
+    <div
+      class="content-area p-5"
+      [ngClass]="{ 'content-expanded': isSidebarCollapsed }"
+    >
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>
