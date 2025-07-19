@@ -14,7 +14,7 @@ dotenv.config();
 
 // app.use(cors({ origin: "http://localhost:4200" }));
 app.use(cors({ origin: [
-  "https://exam-system-production-92be.up.railway.app",
+  "https://exam-system-production-92be.up.railway.app/api",
   "http://localhost:4200",
 ]
 // ] ,
