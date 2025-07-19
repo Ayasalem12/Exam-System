@@ -46,7 +46,7 @@ mongoose
 // Custom 404 Middleware
 app.use((req, res, next) => {
   next(new AppError(404, "Route not found"));
-  res.status(404).json({ status: "fail", message: "Route not found" });
+  // res.status(404).json({ status: "fail", message: "Route not found" });
 });
 
 //error handling
