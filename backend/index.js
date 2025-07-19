@@ -12,14 +12,14 @@ const PORT = process.env.PORT || 3000;
 
 dotenv.config();
 
-// app.use(cors({ origin: "http://localhost:4200" }));
-app.use(cors({ origin: [
-  "https://exam-system-production-92be.up.railway.app",
+app.use(cors({ origin: "https://exam-fullsystem.netlify.app" }));
+// app.use(cors({ origin: [
+//   "https://exam-system-production-92be.up.railway.app",
   // "http://localhost:4200",
-]
+// ]
 // ] ,
 //   credentials:true
-}));
+// }));
 
 
 // Middleware
